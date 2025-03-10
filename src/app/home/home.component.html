@@ -1,1 +1,17 @@
-<p>home works!</p>
+<!--ovako smo dobili prikaz podataka sa apija unutar ove aplikacije <pre>{{flights | json}}</pre>-->
+<!--flights je definisan i treci flights nije definisan-->
+<div *ngIf = "error">
+    <h3>Ooops, an error occured!</h3>
+    <p style="color: red;">{{error}}</p>
+</div>
+
+<div *ngIf= "flights">
+    <p *ngFor="let flight of flights">{{flight.id}} {{flight.destination}} {{flight.flightKey}}</p>
+    <pre>{{flights | json}}</pre>
+</div>
+
+<div *ngIf="!flights && !error">
+    <p>Podaci se ucitavaju</p>
+</div>
+
+
