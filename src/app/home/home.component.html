@@ -1,27 +1,35 @@
 <!--ovako smo dobili prikaz podataka sa apija unutar ove aplikacije <pre>{{flights | json}}</pre>-->
 <!--flights je definisan i treci flights nije definisan... alt+shift+f za formatiranje-->
-<div *ngIf="error">
-    <h3>Ooops, an error occured!</h3>
-    <p style="color: red;">{{error}}</p>
+<div *ngIf="error" class="container">
+    <mat-card class="loading" appearance="outlined" color="red">
+        <mat-card-content>
+            <h1>Ooops, an error occured!</h1>
+            <p style="color: red;">{{error}}</p>
+        </mat-card-content>
+    </mat-card>
 </div>
 
 <div *ngIf="flights" class="container">
     <mat-card class="example-card" appearance="outlined" *ngFor="let flight of flights">
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image [src]="utils.generateDestinationImage(flight.destination)" [alt]="flight.destination">
         <mat-card-content>
             <h2>{{flight.destination}}</h2>
-            <p>{{flight.scheduledAt}}</p>
+            <p>Scheduled at: {{utils.formatDate(flight.scheduledAt)}}</p>
+            <p>Flight number: {{flight.flightNumber}}</p>
+            <p>Plane model: {{flight.plane}}</p>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
+            <a mat-button [routerLink]="['/details/', flight.id]">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Details
+            </a>
+            <button mat-button>
+                <i class="fa-solid fa-cart-shopping"></i> Book Now
+            </button>
         </mat-card-actions>
     </mat-card>
-    
+
     <!-- <p *ngFor="let flight of flights">{{flight.id}} {{flight.destination}} {{flight.flightKey}}</p>
     <pre>{{flights | json}}</pre>> -->
 </div>
 
-<div *ngIf="!flights && !error">
-    <p>Podaci se ucitavaju</p>
-</div>
+<app-loading *ngIf="!flights && !error"/>
