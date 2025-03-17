@@ -4,6 +4,7 @@ import { AboutComponent } from './about/about.component';
 import { SearchComponent } from './search/search.component';
 import { AirlineComponent } from './airline/airline.component';
 import { DetailsComponent } from './details/details.component';
+import { LoginComponent } from './login/login.component';
 
 export const routes: Routes = [
     {path: '', component: HomeComponent },
@@ -11,9 +12,10 @@ export const routes: Routes = [
     {path: 'search', component: SearchComponent },
     {path: 'airlines', component: AirlineComponent },
     {path: 'details/:id', component: DetailsComponent },
+    {path: 'login', component: LoginComponent},
     {path: '**', redirectTo: '' }
 
-];
+]
 //u liniji 8 znaci da definise da bilo koja druga putanja a da ne odgovara ovim navedenim iznad
 //ide na home page i na taj nacin ako neko da pogresan link nece dobiti praznu belu stranicu vec ce videti pocetnu stranicu
 //>reload window i on ce sam ponovo da ucita sve biblioteke koje smo instalirali
